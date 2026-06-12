@@ -1,0 +1,81 @@
+create table if not exists cliente (
+  id integer primary key autoincrement,
+  nome text not null,
+  telefone text not null,
+  cpf text not null UNIQUE,
+  nascimento text not null,
+  cep text not null 
+  );
+  
+  /* INSERT into cliente (nome, telefone, cpf, nascimento, cep)
+  VALUES 
+  ('Vitor', '+55 45 9999-9999', '096.096.709-75', '22/03/2010' '87888997'),
+  ('Giovana', '+55 45 99109-7034', '096.840.709-93', '31/12/0001', '8998779'),
+  */
+ 
+ select * from cliente;
+ 
+ create table if not exists fornecedor (
+   id integer primary key AUTOINCREMENT,
+   nome text not null,
+   cnpj text not null unique,
+   títulos text not null 
+   );
+   
+   /* INSERT into fornecedor (nome, cnpj, títulos)
+  VALUES 
+  ('Arqueiro', '24.345.678/6767-12', 'O Pequeno Príncipe'),
+  ('Darkside', '24.345.678/6767-13', 'Odisseia')
+  */
+  
+  select * from fornecedor;
+  
+  create table if not exists obras (
+   id integer PRIMARY key AUTOINCREMENT
+   nome text not null,
+   categoria text not null,
+   número_de_páginas text not null,
+   editora text not null
+   );
+  
+  /*INSERT into obras (nome, categoria, número_de_páginas, editora)
+  VALUES 
+  ('O Pequeno Príncipe', 'Infantil', '92', 'Arqueiro'),
+  ('Odisseia', 'Aventura', '600', 'Darkside'),
+  ('Garota interrompida', 'Psicológico', '100', 'Darkside')
+  */
+  
+  select * from obras;
+  
+  create table if not exists obra_fornecedor (
+   fornecedor_id integer not null,
+   obras_id integer not null,
+   primary key (fornecedor_id, obras_id),
+   foreign key (fornecedor_id) references fornecedor(id) on delete cascade,
+   foreign key (obras_id) references obras(id),
+   data text not null
+  );
+  
+  create table if not exists movimento (
+   cliente_id integer not null,
+   obras_id integer not null,
+   primary key (cliente_id, obras_id),
+   FOREIGN KEY (cliente_id) REFERENCES cliente(id) ON DELETE CASCADE,
+   FOREIGN KEY (obras_id) REFERENCES obras(id),
+   data text not null
+   );
+  
+   /*INSERT into obras (data)
+  VALUES 
+  ('20/08/2026'),
+  ('21/08/2026');*/
+  
+  create table if not exists item_movimento (
+   id integer primary key AUTOINCREMENT,
+   /*id integer movimento FOREIGN key AUTOINCREMENT,
+    id integer cliente FOREIGN key AUTOINCREMENT,*/
+   nome text not null,
+   categoria text not null,
+   número_de_páginas text not null,
+   editora text not null
+   );
