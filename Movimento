@@ -1,0 +1,12 @@
+SELECT 
+    p.id AS numero_movimento,
+    c.nome AS cliente,
+    prod.nome AS obras,
+    ip.quantidade,
+    ip.preco_unitario,
+    (ip.quantidade * ip.preco_unitario) AS subtotal_item
+FROM movimento p
+INNER JOIN clientes c ON p.cliente_id = c.id
+INNER JOIN itens_movimento ip ON p.id = ip.movimento_id
+INNER JOIN obras ON ip.obras_id = obras.id
+ORDER BY p.id ASC;
