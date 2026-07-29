@@ -36,10 +36,9 @@ CREATE TABLE IF NOT EXISTS obra_fornecedor (
 
 --Tabela Movimento
 CREATE TABLE IF NOT EXISTS movimento (
-  movimento_id INTEGER NOT NULL,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   cliente_id INTEGER NOT NULL,
   movimento_data TEXT NOT NULL,
-  PRIMARY KEY (movimento_id),
   FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id)
  );
 
@@ -62,10 +61,9 @@ CREATE TABLE IF NOT EXISTS item_movimento (
 
 --Tabela Caixa 
 CREATE TABLE IF NOT EXISTS caixa(
- caixa_id INTEGER NOT NULL,
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
  movimento_id INTEGER NOT NULL,
  caixa_valor NUMERIC NOT NULL, 
  caixa_data TEXT DEFAULT CURRENT_TIMESTAMP,
- PRIMARY KEY (caixa_id),
  FOREIGN KEY (movimento_id) REFERENCES movimento(movimento_id)
  );
