@@ -9,9 +9,32 @@ INSERT INTO obras (nome, categoria, numero_de_paginas, editora)
 VALUES 
 ('O Pequeno Príncipe', 'Infantil', '92', 'Arqueiro'),
 ('Odisseia', 'Aventura', '600', 'Darkside'),
-('Garota interrompida', 'Psicológico', '100', 'Darkside');
+('Garota interrompida', 'Psicológico', '100', 'Darkside'),
+('republica', 'filosofia', '104', 'plataokk');
 
 INSERT into cliente (nome, telefone, cpf, nascimento, cep)
-  VALUES 
-  ('Vitor', '+55 45 9999-9999', '096.096.709-75', '22/03/2010', '87855997'),
-  ('Giovana', '+55 45 99109-7034', '096.840.709-93', '31/12/0001', '8998779');
+VALUES 
+('Vitor', '+55 45 9999-9999', '096.096.709-75', '22/03/2010', '87855997'),
+('Giovana', '+55 45 99109-7034', '096.840.709-93', '31/12/0001', '8998779');
+  
+INSERT into movimento (cliente_id, movimento_data)
+VALUES 
+(1, '22/03/2003'),
+(2, '25/04/2003');
+  
+INSERT into caixa (movimento_id, caixa_valor, caixa_data)
+VALUES 
+(1, '2207','22/04/2003'),
+(2, '2587','22/04/2004');
+
+INSERT into obra_fornecedor (fornecedor_id, obras_id, data)
+VALUES 
+(1, 1, '22/04/2003'),
+(2, 2, '22/04/2004'),
+(3, 3, '22/04/2005'),
+(4, 4, '22/04/2006');
+
+INSERT into item_movimento (movimento_id, cliente_id, movimento_data, movimento_tipo, movimento_venda_data, movimento_retorno_data, movimento_devolucao_data, movimento_valor)
+VALUES 
+(1, 1, '22/04/2003', 'rapido','22/04/2002', '22/05/2003', '22/07/2003', '227'),
+(2, 2, '22/04/2004', 'forte', '22/04/2001', '22/06/2003', '22/08/2003', '220');
