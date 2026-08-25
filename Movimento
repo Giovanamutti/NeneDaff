@@ -1,12 +1,50 @@
+1.
 SELECT 
-    p.id AS numero_movimento,
-    c.nome AS cliente,
-    prod.nome AS obras,
-    ip.quantidade,
-    ip.preco_unitario,
-    (ip.quantidade * ip.preco_unitario) AS subtotal_item
-FROM movimento p
-INNER JOIN clientes c ON p.cliente_id = c.id
-INNER JOIN itens_movimento ip ON p.id = ip.movimento_id
-INNER JOIN obras ON ip.obras_id = obras.id
-ORDER BY p.id ASC;
+   movimento.movimento_data,
+   cliente.nome,
+   cliente.telefone,
+   cliente.cpf,
+   cliente.nascimento,
+   cliente.cep
+FROM movimento
+INNER JOIN cliente ON movimento.cliente_id = cliente.id;
+
+2.
+SELECT 
+   obra_fornecedor.data,
+   fornecedor.nome,
+   fornecedor.cnpj,
+   fornecedor.titulos,
+   obras.nome,
+   obras.categoria,
+   obras.numero_de_paginas,
+   obras.editora
+FROM obra_fornecedor
+INNER JOIN fornecedor ON obra_fornecedor.fornecedor_id = fornecedor.id
+INNER JOIN obras ON obra_fornecedor.obras_id = obras.id;
+
+3.
+SELECT 
+   item_movimento.movimento_data,
+   item_movimento.movimento_tipo,
+   item_movimento.movimento_venda_data,
+   item_movimento.movimento_retorno_data,
+   item_movimento.movimento_devolucao_data,
+   item_movimento.movimento_valor,
+   cliente.nome,
+   cliente.telefone,
+   cliente.cpf,
+   cliente.nascimento,
+   cliente.cep,
+   movimento.movimento_data
+FROM item_movimento
+INNER JOIN movimento ON item_movimento.movimento_id = movimento.id
+INNER JOIN cliente ON item_movimento.cliente_id = cliente.id;
+
+4.
+SELECT 
+   caixa.caixa_valor,
+   caixa.caixa_data,
+   movimento.movimento_data
+FROM caixa
+INNER JOIN movimento ON caixa.movimento_id = movimento.id;
