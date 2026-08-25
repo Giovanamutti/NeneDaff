@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS cliente (
   telefone TEXT NOT NULL,
   cpf TEXT NOT NULL UNIQUE,
   nascimento TEXT NOT NULL,
-  cep TEXT NOT NULL 
+  cep TEXT NOT NULL
 );
 
 --Tabela de Fornecedor
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS movimento (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   cliente_id INTEGER NOT NULL,
   movimento_data TEXT NOT NULL,
-  FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id)
+  FOREIGN KEY (cliente_id) REFERENCES cliente(id)
  );
 
 --Tabela Item Movimento
@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS item_movimento (
   item_id INTEGER NOT NULL,
   movimento_id INTEGER NOT NULL,
   cliente_id INTEGER NOT NULL,
-  movimento_loc_id INTEGER NOT NULL,
   movimento_data TEXT NOT NULL, 
   movimento_tipo TEXT NOT NULL,    
   movimento_venda_data TEXT, 
@@ -56,14 +55,15 @@ CREATE TABLE IF NOT EXISTS item_movimento (
   movimento_valor NUMERIC NOT NULL,   
   PRIMARY KEY (item_id),
   FOREIGN KEY (movimento_id) REFERENCES movimento(movimento_id),
-  FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id)
+  FOREIGN KEY (cliente_id) REFERENCES cliente(id)
 );
 
 --Tabela Caixa 
-CREATE TABLE IF NOT EXISTS caixa(
+CREATE TABLE IF NOT EXISTS caixa (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  movimento_id INTEGER NOT NULL,
  caixa_valor NUMERIC NOT NULL, 
- caixa_data TEXT DEFAULT CURRENT_TIMESTAMP,
- FOREIGN KEY (movimento_id) REFERENCES movimento(movimento_id)
+ caixa_data TEXT,
+ FOREIGN KEY (movimento_id) REFERENCES movimento(id)
  );
+  
